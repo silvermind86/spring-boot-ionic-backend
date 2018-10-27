@@ -13,6 +13,7 @@ import com.jonasmagno.cursomc.domain.Cidade;
 import com.jonasmagno.cursomc.domain.Cliente;
 import com.jonasmagno.cursomc.domain.Endereco;
 import com.jonasmagno.cursomc.domain.Estado;
+import com.jonasmagno.cursomc.domain.ItemPedido;
 import com.jonasmagno.cursomc.domain.PagamentoComBoleto;
 import com.jonasmagno.cursomc.domain.PagamentoComCartao;
 import com.jonasmagno.cursomc.domain.Pedido;
@@ -24,6 +25,7 @@ import com.jonasmagno.cursomc.services.CidadeService;
 import com.jonasmagno.cursomc.services.ClienteService;
 import com.jonasmagno.cursomc.services.EnderecoService;
 import com.jonasmagno.cursomc.services.EstadoService;
+import com.jonasmagno.cursomc.services.ItemPedidoService;
 import com.jonasmagno.cursomc.services.PagamentoService;
 import com.jonasmagno.cursomc.services.PedidoService;
 import com.jonasmagno.cursomc.services.ProdutoService;
@@ -47,6 +49,8 @@ public class CursomcApplication implements CommandLineRunner{
 	private PedidoService pedService;
 	@Autowired
 	private PagamentoService pagService;
+	@Autowired
+	private ItemPedidoService itemPedService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(CursomcApplication.class, args);
@@ -110,5 +114,19 @@ public class CursomcApplication implements CommandLineRunner{
 		
 		pedService.salvar(Arrays.asList(ped1, ped2));
 		pagService.salvar(Arrays.asList(pagto1, pagto2));
+		
+		ItemPedido ip1 = new ItemPedido(ped1, p1, 0.00, 1, 20000.00);
+		ItemPedido ip2 = new ItemPedido(ped1, p3, 0.00, 2, 80.00);
+		ItemPedido ip3 = new ItemPedido(ped2, p2, 100.00, 1, 800.00);
+		
+		ped1.getItens().addAll(Arrays.asList(ip1,ip2));
+		ped2.getItens().add(ip3);
+		
+		p1.getItens().add(ip1);
+		p2.getItens().add(ip3);
+		p3.getItens().add(ip2);
+		
+		itemPedService.salvar(Arrays.asList(ip1,ip2,ip3));
+		
 	}
 }
