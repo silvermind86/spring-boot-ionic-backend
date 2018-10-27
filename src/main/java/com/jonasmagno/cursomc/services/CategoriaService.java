@@ -27,4 +27,8 @@ public class CategoriaService {
 	public List<Categoria> salvar(List<Categoria> categorias) {
 		return repo.saveAll(categorias);
 	}
+	
+	public Categoria salvar(Categoria categoria) {
+		return repo.save(categoria);
+	}
 }
