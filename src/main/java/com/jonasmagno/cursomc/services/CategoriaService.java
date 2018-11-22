@@ -43,4 +43,8 @@ public class CategoriaService {
 				"Não é possível excluir uma Categoria que possui Produtos");
 		}
 	}
+
+	public List<Categoria> buscarTodos() {
+		return repo.findAll();
+	}
 }
