@@ -22,7 +22,12 @@ public class ClienteService {
 	@Autowired
 	private ClienteRepository repo;
 	
-	public Cliente salvar(Cliente cliente) {
+	public Cliente inserir(Cliente cliente) {
+		cliente.setId(null);		
+		return repo.save(cliente);
+	}
+	
+	public Cliente atualizar(Cliente cliente) {
 		Cliente novoCLiente = buscar(cliente.getId());
 		atualizaDados(novoCLiente, cliente);
 		return repo.save(novoCLiente);

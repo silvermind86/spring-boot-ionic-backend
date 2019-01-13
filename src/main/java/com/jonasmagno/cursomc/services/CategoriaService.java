@@ -34,8 +34,19 @@ public class CategoriaService {
 		return repo.saveAll(categorias);
 	}
 	
-	public Categoria salvar(Categoria categoria) {
+	public Categoria inserir(Categoria categoria) {
+		categoria.setId(null);
 		return repo.save(categoria);
+	}
+	
+	public Categoria atualizar(Categoria categoria) {
+		Categoria novaCategoria = buscar(categoria.getId());
+		atualizaDados(novaCategoria, categoria);
+		return repo.save(novaCategoria);
+	}
+
+	private void atualizaDados(Categoria novaCategoria, Categoria categoria) {
+		novaCategoria.setNome(categoria.getNome());
 	}
 
 	public void delete(Integer id) {
