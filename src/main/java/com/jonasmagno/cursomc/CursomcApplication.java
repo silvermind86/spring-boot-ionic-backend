@@ -104,7 +104,7 @@ public class CursomcApplication implements CommandLineRunner{
 		
 		cli1.getEnderecos().addAll(Arrays.asList(e1,e2));
 		
-		cliService.salvar(cli1);
+		cliService.inserir(cli1);
 		endService.salvar(Arrays.asList(e1,e2));
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
